@@ -1,0 +1,44 @@
+### Basic Information
+# Configure your username, timezone, hostname, etc.
+username: administrator # Replace with your non-root user with sudo privileges - Run `whoami`
+PUID: 1000 # Replace with your UID - Run `id`
+PGID: 1000 # Replace with your GID - Run `id`
+hostname: boxy # Replace with your own hostname - Get Creative!
+timezone: Adelaide/Australia # Replace with your Timezone - https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+### Storage Configuration
+# If your host has both SSD and HDD storage setup, use SSD for container_dir and data_dir, and leave media_dir on HDDs.
+container_dir: /home/{{ username }}/container # Docker container storage directory - Leave as is.
+data_dir: /home/{{ username }}/data # Data Storage Directory (service1, service2, etc.)
+media_dir: /home/{{ username }}/media # Media Storage Directory (Jellyfin, etc.)
+
+### Domain/Cloudflare Configuration
+# Set your domain, as well as cloudflare email & API key
+# For more information, see /docs/cloudflaresetup.md
+domain: corp.example.com # Domain - You must own this username, and it must be setup in Cloudflare!
+cf_email: user@example.com # Replace with your Cloudflare account email
+cf_api_key: AAAAAAAAAAAAAAAAAAAA # Replace with your Cloudflare API Key
+traefik_basic_auth_hash: admin:$$2y$$05$$BTfomtRLcqKt9jFj0.Yfh.nQsZL.mxsjJNlyCJriecyWKQUGGTKqW # admin:test1234
+
+### Other Configuration Toggles
+addusertodockergroup: true # Add the user to the `docker` group? - see SECURITY.md.
+
+packages:
+  - unzip
+  - wget
+  - curl
+  - git
+  - python3
+  - python3-pip
+
+docker_dependencies:
+  - ca-certificates
+  - gnupg
+  - curl
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin

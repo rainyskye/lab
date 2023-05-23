@@ -1,0 +1,57 @@
+---
+- name: "Docker - Set architecture to x86_64"
+  ansible.builtin.set_fact:
+    docker_arch: amd64
+  when: ansible_architecture == "x86_64"
+
+- name: "Docker - Set architecture to aarch64"
+  ansible.builtin.set_fact:
+    docker_arch: arm64
+  when: ansible_architecture == "aarch64"
+
+- name: "Docker - Install Dependencies"
+  ansible.builtin.package:
+    name: "{{ docker_dependencies }}"
+    state: present
+
+- name: "Docker - Add GPG key for apt"
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    state: present
+  when: ansible_distribution in ["Ubuntu", "Debian"]
+
+- name: "Docker - Add repository for apt"
+  ansible.builtin.apt_repository:
+    repo: deb [arch={{ docker_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
+    state: present
+  when: ansible_distribution in ["Ubuntu", "Debian"]
+
+- name: "Docker - Install Docker"
+  ansible.builtin.package:
+    name: "{{ docker_packages }}"
+    state: present
+
+- name: "Docker - Ensure `docker` group exists"
+  ansible.builtin.group:
+    name: docker
+    state: present
+#  when: addusertodockergroup is True
+
+- name: "Docker - Add user to `docker` group"
+  ansible.builtin.user:
+    name: "{{ username }}"
+    groups: docker
+    append: true
+#  when: addusertodockergroup is True
+
+- name: "Docker -  Enable service"
+  ansible.builtin.service:
+    name: docker
+    enabled: true
+    state: started
+
+- name: "Docker - Create `lab` docker network"
+  community.docker.docker_network:
+    name: lab
+    state: present
+    driver: bridge

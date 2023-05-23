@@ -1,0 +1,26 @@
+---
+- name: Begin Deployment
+  hosts: all
+  become: true
+  vars_files:
+    - ./vars.yml
+
+  tasks:
+    - name: Task - Prepare Server
+      ansible.builtin.include_tasks: tasks/core.yml
+
+    - name: Task - Install Docker
+      ansible.builtin.include_tasks: tasks/dockersetup.yml
+
+    - name: Task - Deploy Services
+      ansible.builtin.include_tasks: "tasks/{{ item }}.yml"
+      loop:
+        - traefik
+        - vaultwarden
+
+    - name: Task - Setup Ownership of Container and Data Directories
+      ansible.builtin.include_tasks: tasks/ownership.yml
+
+    - name: Task - Reboot the server
+      ansible.builtin.reboot:
+        msg: "Rebooting server to finalise setup"

@@ -1,0 +1,5 @@
+[host]
+10.6.0.17
+
+[host:vars]
+ansible_user = administrator
