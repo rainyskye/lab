@@ -14,11 +14,13 @@
 - ~~Vaultwarden (Bitwarden Server written in Rust)~~
 - ~~Nginx Proxy Manager (Reverse Proxy with a GUI)~~
 
+> If you want a service that isn't listed here, feel free to open an issue or submit a PR adding it!
+
 ### Services which may be added:
+> Services here may need more planning, aren't fully stable yet, aren't deployable with docker, etc.
 - Traefik (Reverse Proxy)
   - How to automate/manage config for beginner?
 
-> If you want a service that isn't listed here, feel free to open an issue or submit a PR adding it!
 
 ### How to Configure/Setup:
 *to-do*
