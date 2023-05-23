@@ -10,17 +10,21 @@
   - Support may be added for other distributions (Fedora Server, Debian, etc.), but it isn't planned at this time.
 
 ### Services: (Services with a strikethrough are yet to be added, but are planned.)
-- ~~Homer (Dashboard)~~
-- ~~Vaultwarden (Bitwarden Server written in Rust)~~
-- ~~Nginx Proxy Manager (Reverse Proxy with a GUI)~~
-
+- *to be filled*
 > If you want a service that isn't listed here, feel free to open an issue or submit a PR adding it!
 
-### Services which may be added:
-> Services here may need more planning, aren't fully stable yet, aren't deployable with docker, etc.
-- Traefik (Reverse Proxy)
-  - How to automate/manage config for beginner?
+### Planned Features/Services to be added
+ - [ ] Fully Automated Installation and Setup
+ - [ ] Traefik (Reverse Proxy) 
+ - [ ] Homer (Dashboard)
+ - [ ] Vaultwarden (Bitwarden Server written in Rust)
+
 
 
 ### How to Configure/Setup:
 *to-do*
+
+
+
+### Thanks to:
+- Jeff Geerling - My first introduction to Ansible [[Book - Ansible for DevOps](https://www.ansiblefordevops.com/), [Github](https://github.com/geerlingguy), [YouTube](https://www.youtube.com/c/JeffGeerling)]
